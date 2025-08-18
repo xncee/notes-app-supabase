@@ -1,15 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import supabase from "@/lib/supabase/client";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 import type { Note } from "@/lib/types";
 import NoteCard from "@/components/note-card";
-import { createNote, getNotes } from "@/data/notes/notes";
+import { getNotes } from "@/data/notes/notes";
+import NoteForm from "@/components/note-form";
 
 export default function NotesPage() {
   const [notesList, setNotesList] = useState<Note[]>([]);
   const [isFetching, setFetching] = useState(false);
-  const [newNote, setNewNote] = useState("");
 
   useEffect(() => {
     retrieveNotes();
@@ -25,19 +23,8 @@ export default function NotesPage() {
     setFetching(false);
   };
 
-  const createNewNote = async (e: FormEvent) => {
-    e.preventDefault();
-    const note = {
-      title: newNote.trim(),
-      body: "",
-    };
-
-    const { data, error } = await createNote(note);
-    if (error) {
-      console.error("Error creating note:", error);
-    } else if (data && data.length > 0) setNotesList([data[0], ...notesList]);
-
-    setNewNote("");
+  const addNewNote = async (note: Note) => {
+    setNotesList((prevNotes) => [note, ...prevNotes]);
   };
 
   const deleteNoteById = async (id: number) => {
@@ -50,31 +37,21 @@ export default function NotesPage() {
   };
 
   return (
-    <div className="mt-5 flex h-screen w-full flex-col gap-4">
-      <form
-        onSubmit={createNewNote}
-        className="flex w-full flex-col gap-2 self-center p-4 md:w-175"
-      >
-        <Input
-          type="text"
-          placeholder="Enter a note.."
-          value={newNote}
-          onChange={(e) => setNewNote(e.target.value)}
-          required
-        />
-        <Button type="submit" className="w-full">
-          Add Note
-        </Button>
-      </form>
-      <h1 className="flex justify-center text-4xl font-bold md:text-3xl">
-        Notes
-      </h1>
-      <ul className="m-4 grid grid-cols-1 items-center gap-2 md:grid-cols-2 lg:grid-cols-3">
-        {isFetching && <h1>Loading..</h1>}
-        {notesList.map((note) => (
-          <NoteCard key={note.id} note={note} onDelete={deleteNoteById} />
-        ))}
-      </ul>
+    <div className="mt-10 flex w-full grid-cols-1 flex-col gap-10 p-4">
+      {/* md:grid-cols-[2fr_1fr] */}
+      <NoteForm
+        className="w-full self-center md:w-[100%] lg:w-[75%]"
+        addNewNote={addNewNote}
+      />
+      <div className="flex flex-col gap-5">
+        <h1 className="text-center text-4xl font-bold md:text-3xl">Notes</h1>
+        <ul className="grid grid-cols-1 items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {isFetching && <h1>Loading..</h1>}
+          {notesList.map((note) => (
+            <NoteCard key={note.id} note={note} onDelete={deleteNoteById} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

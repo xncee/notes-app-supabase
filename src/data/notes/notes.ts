@@ -1,4 +1,5 @@
 import supabase from "@/lib/supabase/client";
+import type { Note } from "@/lib/types";
 
 export async function getNotes() {
   const { data, error } = await supabase
@@ -9,12 +10,12 @@ export async function getNotes() {
   return { data, error };
 }
 
-export async function createNote(note: { title: string; body: string }) {
-  const { title, body } = note;
+export async function createNote(note: Note) {
+  const { title, content } = note;
 
   const { data, error } = await supabase
     .from("notes")
-    .insert([{ title, body }])
+    .insert([{ title, content }])
     .select();
 
   return { data, error };

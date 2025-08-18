@@ -11,49 +11,49 @@ import { ThemeProvider } from "./context/theme-context";
 import NavBar from "./components/nav-bar";
 
 function App() {
-    return (
-        <ThemeProvider>
-            <AuthProvider>
-                <div className="bg-[var(--color-background)]">
-                    <Router>
-                        <Routes>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/login" element={<LoginPage />} />
-                            <Route path="/sign-up" element={<SignUpPage />} />
-                            <Route path="/logout" element={<LogoutPage />} />
-                            <Route
-                                path="/notes"
-                                element={
-                                    <ProtectedRoute>
-                                        <NavBar />
-                                        <NotesPage />
-                                    </ProtectedRoute>
-                                }
-                            />
-                            <Route
-                                path="/notes/:noteId"
-                                element={
-                                    <ProtectedRoute>
-                                        <NavBar />
-                                        <NoteDetails />
-                                    </ProtectedRoute>
-                                }
-                            />
-                            <Route
-                                path="/protected"
-                                element={
-                                    <ProtectedRoute>
-                                        <NavBar />
-                                        <NotesPage />
-                                    </ProtectedRoute>
-                                }
-                            />
-                        </Routes>
-                    </Router>
-                </div>
-            </AuthProvider>
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <div className="bg-[var(--color-background)]">
+          <Router>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/logout" element={<LogoutPage />} />
+              <Route
+                path="/notes"
+                element={
+                  <ProtectedRoute>
+                    <NavBar />
+                    <NotesPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/notes/:noteId"
+                element={
+                  <ProtectedRoute>
+                    <NavBar />
+                    <NoteDetails />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/protected"
+                element={
+                  <ProtectedRoute>
+                    <NavBar />
+                    <NotesPage />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </Router>
+        </div>
+      </AuthProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;

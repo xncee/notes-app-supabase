@@ -11,7 +11,7 @@ export default function ProtectedRoute({
     const location = useLocation();
     if (isLoading) {
         return (
-            <h1 className="flex h-svh items-center justify-center text-xl">
+            <h1 className="flex h-screen items-center justify-center text-xl">
                 Loading...
             </h1>
         );

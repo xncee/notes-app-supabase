@@ -32,7 +32,7 @@ export default function NotesPage() {
   const handleAddNote = async (e: FormEvent) => {
     e.preventDefault();
     const note = {
-      title: newNote,
+      title: newNote.trim(),
     };
     const { data, error } = await supabase
       .from("notes")

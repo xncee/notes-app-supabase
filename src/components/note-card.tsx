@@ -19,7 +19,9 @@ export default function NoteCard({
   return (
     <Card className="flex h-full w-full justify-between">
       <CardHeader className="text-lg font-bold">{note.title}</CardHeader>
-      <CardContent>{note.body}</CardContent>
+      <CardContent className="break-words whitespace-pre-line">
+        {note.body}
+      </CardContent>
       <CardFooter className="flex w-full justify-between px-2">
         <p className="text-[var(--color-muted-foreground)]">{formattedDate}</p>
         <div className="flex gap-1">

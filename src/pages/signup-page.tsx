@@ -1,11 +1,11 @@
-import { SignUpForm } from "@/components/sign-up-form";
+import { SignUpForm } from "@/components/signup-form";
 import { useAuth } from "@/context/auth-context";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 
 export default function SignUpPage() {
   const { isAuth } = useAuth();
   const location = useLocation();
-  //console.log(location);
+
   if (isAuth) {
     const from = location.state?.from.pathname;
     if (from) return <Navigate to={from} />;

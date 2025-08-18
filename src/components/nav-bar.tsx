@@ -1,27 +1,21 @@
 import { useAuth } from "@/context/auth-context";
 import { Link } from "react-router-dom";
-
+import { ThemeSwitcher } from "./theme-switcher";
+import AuthButtons from "./auth-buttons";
+import UserActionsMenu from "./user-actions-menu";
 export default function NavBar() {
-    const { isAuth, user } = useAuth();
+    const { isAuth } = useAuth();
 
     return (
-        <div className="flex bg-gray-400 justify-between p-4">
+        <div className="flex justify-between py-4 pl-10 pr-5 w-full shadow-md">
+            {" "}
             <Link to="/" replace>
                 <p className="text-xl font-bold">Notes App</p>
             </Link>
-            {isAuth ? (
-                <div className="flex gap-2">
-                    <p>{`Logged in as ${user?.email}`}</p>
-                    <Link to="/logout" replace>
-                        Logout
-                    </Link>
-                </div>
-            ) : (
-                <div className="flex gap-4">
-                    <Link to="/login">Login</Link>
-                    <Link to="/sign-up">Sign Up</Link>
-                </div>
-            )}
+            <div className="flex gap-2">
+                {isAuth ? <UserActionsMenu /> : <AuthButtons />}
+                <ThemeSwitcher />
+            </div>
         </div>
     );
 }

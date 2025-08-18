@@ -7,8 +7,7 @@ export default function NavBar() {
   const { isAuth } = useAuth();
 
   return (
-    <div className="flex w-full justify-between py-4 pr-5 pl-10 shadow-md">
-      {" "}
+    <div className="flex w-full items-center justify-between px-5 py-4 shadow-md">
       <Link to="/" replace>
         <p className="text-2xl font-bold text-blue-700">Notes App</p>
       </Link>

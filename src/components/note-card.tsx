@@ -10,7 +10,7 @@ export default function NoteCard({
   note: Note;
   onDelete: (id: number) => void;
 }) {
-  const formattedDate = new Date(note.created_at).toLocaleDateString();
+  const formattedDate = new Date(note.created_at!).toLocaleDateString();
   const navigate = useNavigate();
   const handleView = () => {
     navigate(`/notes/${note.id}`);
@@ -20,13 +20,13 @@ export default function NoteCard({
     <Card className="flex h-full w-full justify-between">
       <CardHeader className="text-lg font-bold">{note.title}</CardHeader>
       <CardContent className="break-words whitespace-pre-line">
-        {note.body}
+        {note.content}
       </CardContent>
       <CardFooter className="flex w-full justify-between px-2">
         <p className="text-[var(--color-muted-foreground)]">{formattedDate}</p>
         <div className="flex gap-1">
           <Button onClick={handleView}>View</Button>
-          <Button onClick={() => onDelete(note.id)}>Delete</Button>
+          <Button onClick={() => onDelete(note.id!)}>Delete</Button>
         </div>
       </CardFooter>
     </Card>

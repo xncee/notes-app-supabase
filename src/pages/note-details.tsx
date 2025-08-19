@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { Note } from "@/lib/types";
 import PageNotFound from "./page-not-found";
 import InternalServerError from "./internal-server-error";
-import FullNote from "@/components/notes/full-note";
+import NoteDetail from "@/components/notes/note-detail";
 import { getNoteById } from "@/data/notes/notes";
 
 export default function NoteDetails() {
@@ -40,7 +40,7 @@ export default function NoteDetails() {
   }
   return (
     <div className="p-4">
-      <FullNote note={note} onDelete={() => {}} />
+      <NoteDetail note={note} onDelete={() => {}} />
     </div>
   );
 }

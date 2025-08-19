@@ -3,34 +3,44 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { useState } from "react";
-import { updateNote } from "@/data/notes/notes";
+import { deleteNote, updateNote } from "@/data/notes/notes";
 import { toast } from "sonner";
 import TextEditor from "./text-editor";
+import { Trash2 } from "lucide-react";
 
-export default function FullNote({
-  note,
-}: {
-  note: Note;
-  fullView?: boolean;
-  onDelete: (id: number) => void;
-}) {
+export default function NoteDetail({ note }: { note: Note }) {
   const [currentNoteContent, setCurrentNoteContent] = useState<string>(
     note.content,
   );
+  const [isSaving, setSaving] = useState(false);
+
   const formattedDate = new Date(note.created_at!).toLocaleString();
 
+  const handleDeleteNote = async () => {
+    const { error } = await deleteNote(note.id!);
+    if (error) {
+      toast.error("Note Was Not Deleted", {
+        description: error.message || "An error occurred.",
+      });
+    } else {
+      toast.warning("Note deleted.");
+      window.location.href = "/notes";
+    }
+  };
   const handleUpdateNote = async () => {
     if (currentNoteContent === note.content) return;
+    setSaving(true);
 
     note.content = currentNoteContent;
     const { error } = await updateNote(note);
     if (error) {
       toast.error("Note Was Not Updated", {
-        description: error.message || "An error occurd.",
+        description: error.message || "An error occurred.",
       });
     } else {
-      toast.success("Note updated.");
+      toast.message("Note updated.");
     }
+    setSaving(false);
   };
 
   return (
@@ -47,28 +57,31 @@ export default function FullNote({
             variant="outline"
             size="lg"
             onClick={handleUpdateNote}
-            hidden={note.content === currentNoteContent}
+            className="text-muted-foreground hover:cursor-pointer"
+            hidden={currentNoteContent === note.content || isSaving}
           >
             Save
           </Button>
           <Button
             variant="destructive"
             size="lg"
-            className="hover:opacity-75"
-            onClick={() => {}}
+            className="hover:cursor-pointer hover:opacity-75"
+            onClick={handleDeleteNote}
           >
+            <Trash2 />
             Delete
           </Button>
         </div>
       </CardHeader>
       <Separator />
       <CardFooter className="flex w-full items-center justify-between px-4"></CardFooter>
-      <CardContent className="break-words whitespace-pre-line">
+      <CardContent>
         <TextEditor>
           <textarea
-            className="field-sizing-content resize-none border-none outline-none"
+            className="field-sizing-content w-full resize-none border-none break-words whitespace-pre-line outline-none"
             value={currentNoteContent}
             onChange={(e) => setCurrentNoteContent(e.target.value)}
+            onBlur={handleUpdateNote}
           />
         </TextEditor>
       </CardContent>

@@ -14,10 +14,10 @@ export function NoteSkeleton() {
         <Skeleton className="h-5" />
       </CardContent>
       <CardFooter className="mt-auto flex w-full items-center justify-between px-4">
-        <Skeleton className="h-6 w-[100px]" />
+        <Skeleton className="h-6 w-[200px]" />
         <div className="flex gap-2">
-          <Skeleton className="h-8.5 w-[65px]" />
           <Skeleton className="h-8.5 w-[75px]" />
+          <Skeleton className="h-8.5 w-[85px]" />
         </div>
       </CardFooter>
     </Card>

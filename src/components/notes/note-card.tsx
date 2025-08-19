@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "../ui/separator";
+import { Eye, Trash2 } from "lucide-react";
 
 export default function NoteCard({
   note,
@@ -37,8 +38,14 @@ export default function NoteCard({
       <CardFooter className="flex w-full items-center justify-between px-4">
         <p className="text-[var(--color-muted-foreground)]">{formattedDate}</p>
         <div className="flex gap-2">
-          <Button onClick={handleView}>View</Button>
-          <Button onClick={() => onDelete(note.id!)}>Delete</Button>
+          <Button onClick={handleView}>
+            <Eye />
+            View
+          </Button>
+          <Button variant="destructive" onClick={() => onDelete(note.id!)}>
+            <Trash2 />
+            Delete
+          </Button>
         </div>
       </CardFooter>
     </Card>

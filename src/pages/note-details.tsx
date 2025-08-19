@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { Note } from "@/lib/types";
 import PageNotFound from "./page-not-found";
 import InternalServerError from "./internal-server-error";
-import NoteCard from "@/components/notes/note-card";
+import FullNote from "@/components/notes/full-note";
 
 export default function NoteDetails() {
   const { noteId } = useParams();
@@ -35,12 +35,15 @@ export default function NoteDetails() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return null;
   }
 
+  if (!note) {
+    return <PageNotFound />;
+  }
   return (
-    <>
-      {note ? <NoteCard note={note} onDelete={() => {}} /> : <PageNotFound />}
-    </>
+    <div className="p-4">
+      <FullNote note={note} onDelete={() => {}} />
+    </div>
   );
 }

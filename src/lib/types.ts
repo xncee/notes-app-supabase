@@ -1,3 +1,7 @@
+export type User = {
+  id: string;
+  name: string;
+};
 export type Note = {
   id?: number;
   user_id?: string;

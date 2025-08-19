@@ -12,12 +12,14 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useAuth } from "@/context/auth-context";
 import { toast } from "sonner";
+import { createUser } from "@/data/users/users";
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const { signUp } = useAuth();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
@@ -28,15 +30,22 @@ export function SignUpForm({
     setError("");
     setLoading(true);
     try {
-      await signUp(email, password);
-      toast.success("Check your email for confirmation link.");
-    } catch (error) {
-      setError(String(error));
+      const { user, error } = await signUp(email, password);
+      if (error) {
+        setError(error.message);
+      } else if (user) {
+        toast.success("Check your email for confirmation link.");
+        try {
+          await createUser({ id: user.id, name });
+        } catch (err) {
+          console.error("Failed to save user profile:", err);
+          setError("Failed to save user profile.");
+        }
+      }
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
-
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -49,6 +58,17 @@ export function SignUpForm({
         <CardContent>
           <form onSubmit={handleSignUp}>
             <div className="flex flex-col gap-6">
+              <div className="grid gap-3">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
               <div className="grid gap-3">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -74,7 +94,7 @@ export function SignUpForm({
                 <p className="text-center text-red-400">{error}</p>
               </div>
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? "Signing up..." : "Sign Up"}
                 </Button>
                 <Button variant="outline" className="w-full">

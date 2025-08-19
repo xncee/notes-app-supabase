@@ -7,8 +7,14 @@ type AuthContextType = {
   isAuth: boolean;
   user: User | null;
   logout: () => void;
-  signIn: (email: string, password: string) => void;
-  signUp: (email: string, password: string) => void;
+  signIn: (
+    email: string,
+    password: string,
+  ) => Promise<{ user: User | null; error: Error | null }>;
+  signUp: (
+    email: string,
+    password: string,
+  ) => Promise<{ user: User | null; error: Error | null }>;
 };
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -49,25 +55,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
-    if (error) {
-      throw new Error(error.message);
-    } else {
-      //logged in
-      //console.log(data);
-    }
+
+    return { user: data.user, error };
   };
   const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
-    if (error) {
-      throw new Error(error.message);
-    }
+
+    return { user: data.user, error };
   };
 
   const logout = async () => {

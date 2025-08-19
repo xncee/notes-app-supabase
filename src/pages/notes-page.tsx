@@ -1,10 +1,10 @@
 import supabase from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import type { Note } from "@/lib/types";
-import NoteCard from "@/components/note-card";
+import NoteCard from "@/components/notes/note-card";
 import { getNotes } from "@/data/notes/notes";
-import NoteForm from "@/components/note-form";
-import { NoteSkeleton } from "@/components/note-skeleton";
+import NoteForm from "@/components/notes/note-form";
+import { NoteSkeleton } from "@/components/notes/note-skeleton";
 
 export default function NotesPage() {
   const [notesList, setNotesList] = useState<Note[]>([]);

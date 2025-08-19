@@ -36,7 +36,14 @@ export default function NotesPage() {
       setNotesList(notesList.filter((note) => note.id !== id));
     }
   };
-  const renderSkeletons = (count: number) => {
+  const renderSkeletons = () => {
+    let count = 2;
+    if (window.innerWidth >= 1024) {
+      count = 6;
+    } else if (window.innerWidth >= 768) {
+      count = 4;
+    }
+
     return (
       <>
         {Array.from({ length: count }, (_, index) => (
@@ -55,7 +62,7 @@ export default function NotesPage() {
       <div className="flex flex-col gap-5">
         <h1 className="text-center text-4xl font-bold md:text-3xl">Notes</h1>
         <ul className="grid grid-cols-1 items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {isFetching && renderSkeletons(screen.width <= 768 ? 2 : 4)}
+          {isFetching && renderSkeletons()}
           {notesList.map((note) => (
             <NoteCard key={note.id} note={note} onDelete={deleteNoteById} />
           ))}

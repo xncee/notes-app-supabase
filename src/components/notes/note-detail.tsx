@@ -7,14 +7,13 @@ import { deleteNote, updateNote } from "@/data/notes/notes";
 import { toast } from "sonner";
 import TextEditor from "./text-editor";
 import { Trash2 } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 
 export default function NoteDetail({ note }: { note: Note }) {
   const [currentNoteContent, setCurrentNoteContent] = useState<string>(
     note.content,
   );
   const [isSaving, setSaving] = useState(false);
-
-  const formattedDate = new Date(note.created_at!).toLocaleString();
 
   const handleDeleteNote = async () => {
     const { error } = await deleteNote(note.id!);
@@ -23,8 +22,8 @@ export default function NoteDetail({ note }: { note: Note }) {
         description: error.message || "An error occurred.",
       });
     } else {
-      toast.warning("Note deleted.");
       window.location.href = "/notes";
+      toast.warning("Note deleted.");
     }
   };
   const handleUpdateNote = async () => {
@@ -47,15 +46,14 @@ export default function NoteDetail({ note }: { note: Note }) {
     <Card className="flex h-full w-full justify-between">
       <CardHeader className="flex flex-wrap-reverse justify-between gap-5">
         <div className="flex flex-col gap-2">
-          <p className="text-[var(--color-muted-foreground)]">
-            {formattedDate}
+          <p className="text-muted-foreground">
+            {formatDate(note.created_at!)}
           </p>
           <h1 className="text-2xl font-bold text-balance">{note.title}</h1>
         </div>
         <div className="mb-auto ml-auto flex gap-2">
           <Button
             variant="outline"
-            size="lg"
             onClick={handleUpdateNote}
             className="text-muted-foreground hover:cursor-pointer"
             hidden={currentNoteContent === note.content || isSaving}
@@ -64,7 +62,6 @@ export default function NoteDetail({ note }: { note: Note }) {
           </Button>
           <Button
             variant="destructive"
-            size="lg"
             className="hover:cursor-pointer hover:opacity-75"
             onClick={handleDeleteNote}
           >

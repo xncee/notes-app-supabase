@@ -6,6 +6,7 @@ import { getNotes } from "@/data/notes/notes";
 import NoteForm from "@/components/notes/note-form";
 import { NoteSkeleton } from "@/components/notes/note-skeleton";
 import { toast } from "sonner";
+import { Separator } from "../components/ui/separator";
 
 export default function NotesPage() {
   const [notesList, setNotesList] = useState<Note[]>([]);
@@ -63,8 +64,9 @@ export default function NotesPage() {
         className="w-full self-center md:w-[100%] lg:w-[75%]"
         addNewNote={addNewNote}
       />
+      <Separator />
       <div className="flex flex-col gap-5">
-        <h1 className="text-center text-4xl font-bold md:text-3xl">Notes</h1>
+        <h1 className="text-center text-3xl font-bold">Notes</h1>
         <ul className="grid grid-cols-1 items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
           {isFetching && renderSkeletons()}
           {notesList.map((note) => (

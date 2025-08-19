@@ -5,16 +5,16 @@ import { Skeleton } from "../ui/skeleton";
 export function NoteSkeleton() {
   return (
     <Card className="flex h-full w-full justify-between">
-      <CardHeader className="text-lg font-bold">
+      <CardHeader>
+        <Skeleton className="h-5 w-[160px]" />
         <Skeleton className="h-7 w-[250px]" />
       </CardHeader>
       <Separator />
-      <CardContent className="line-clamp-3 flex flex-col gap-2 align-text-top break-words whitespace-pre-line">
+      <CardContent className="flex flex-col gap-2">
         <Skeleton className="h-5" />
         <Skeleton className="h-5" />
       </CardContent>
-      <CardFooter className="mt-auto flex w-full items-center justify-between px-4">
-        <Skeleton className="h-6 w-[200px]" />
+      <CardFooter className="mt-auto flex w-full items-center justify-end px-4">
         <div className="flex gap-2">
           <Skeleton className="h-8.5 w-[75px]" />
           <Skeleton className="h-8.5 w-[85px]" />

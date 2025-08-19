@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "../ui/separator";
 import { Eye, Trash2 } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 
 export default function NoteCard({
   note,
@@ -14,7 +15,6 @@ export default function NoteCard({
   fullView?: boolean;
   onDelete: (id: number) => void;
 }) {
-  const formattedDate = new Date(note.created_at!).toLocaleString();
   const navigate = useNavigate();
   const handleView = () => {
     navigate(`/notes/${note.id}`);
@@ -22,12 +22,15 @@ export default function NoteCard({
 
   return (
     <Card className="flex h-full w-full justify-between">
-      <CardHeader className="text-lg font-bold">
-        {fullView
-          ? note.title
-          : note.title.length <= 20
+      <CardHeader>
+        <p className="text-muted-foreground">{formatDate(note.created_at!)}</p>
+        <h2 className="text-lg font-bold">
+          {fullView
             ? note.title
-            : note.title.slice(0, 20) + "..."}
+            : note.title.length <= 20
+              ? note.title
+              : note.title.slice(0, 20) + "..."}
+        </h2>
       </CardHeader>
       <Separator />
       <CardContent
@@ -35,14 +38,18 @@ export default function NoteCard({
       >
         {note.content}
       </CardContent>
-      <CardFooter className="flex w-full items-center justify-between px-4">
-        <p className="text-[var(--color-muted-foreground)]">{formattedDate}</p>
+      <CardFooter className="flex w-full items-center justify-end px-4">
+        {/* <p className="text-[var(--color-muted-foreground)]">{formattedDate}</p> */}
         <div className="flex gap-2">
-          <Button onClick={handleView}>
+          <Button className="hover:cursor-pointer" onClick={handleView}>
             <Eye />
             View
           </Button>
-          <Button variant="destructive" onClick={() => onDelete(note.id!)}>
+          <Button
+            variant="destructive"
+            className="hover:cursor-pointer hover:opacity-75"
+            onClick={() => onDelete(note.id!)}
+          >
             <Trash2 />
             Delete
           </Button>

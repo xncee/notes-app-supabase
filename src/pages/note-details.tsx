@@ -40,7 +40,7 @@ export default function NoteDetails() {
   }
   return (
     <div className="p-4">
-      <NoteDetail note={note} onDelete={() => {}} />
+      <NoteDetail note={note} />
     </div>
   );
 }

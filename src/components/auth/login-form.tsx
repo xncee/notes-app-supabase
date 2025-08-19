@@ -26,11 +26,8 @@ export function LoginForm({
     e.preventDefault();
     setError("");
     setLoading(true);
-    try {
-      await signIn(email, password);
-    } catch (error) {
-      setError(String(error));
-    }
+    const { error } = await signIn(email, password);
+    if (error) setError(error.message);
 
     setLoading(false);
   };
@@ -78,7 +75,7 @@ export function LoginForm({
                 <p className="text-center text-red-400">{error}</p>
               </div>
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? "Logging in..." : "Login"}
                 </Button>
                 <Button variant="outline" className="w-full">

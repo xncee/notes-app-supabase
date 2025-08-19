@@ -1,6 +1,12 @@
 import supabase from "@/lib/supabase/client";
 import type { Note } from "@/lib/types";
 
+export async function getNoteById(id: string) {
+  const { data, error } = await supabase.from("notes").select().eq("id", id);
+
+  return { data, error };
+}
+
 export async function getNotes() {
   const { data, error } = await supabase
     .from("notes")

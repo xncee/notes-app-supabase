@@ -5,6 +5,7 @@ import NoteCard from "@/components/notes/note-card";
 import { getNotes } from "@/data/notes/notes";
 import NoteForm from "@/components/notes/note-form";
 import { NoteSkeleton } from "@/components/notes/note-skeleton";
+import { toast } from "sonner";
 
 export default function NotesPage() {
   const [notesList, setNotesList] = useState<Note[]>([]);
@@ -18,9 +19,12 @@ export default function NotesPage() {
     setFetching(true);
     const { data, error } = await getNotes();
     if (error) {
-      console.error("Error fetching notes:", error);
-    } else if (data && data.length > 0) setNotesList(data);
-
+      toast.error("Failed to fetch notes. Try refreshing the page.", {
+        description: error.message,
+      });
+    } else {
+      setNotesList(data!);
+    }
     setFetching(false);
   };
 

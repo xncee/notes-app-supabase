@@ -7,13 +7,13 @@ export default function NavBar() {
   const { isAuth } = useAuth();
 
   return (
-    <div className="flex w-full items-center justify-between px-5 py-4 shadow-md">
+    <div className="flex w-full items-center justify-between border-b px-5 py-4 shadow-sm">
       <Link to="/" replace>
         <p className="text-2xl font-bold text-blue-700">Notes App</p>
       </Link>
       <div className="flex gap-2">
         {isAuth ? <UserActionsMenu /> : <AuthButtons />}
-        <ThemeSwitcher />
+        <ThemeSwitcher ICON_SIZE={16} />
       </div>
     </div>
   );

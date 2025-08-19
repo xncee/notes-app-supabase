@@ -2,15 +2,18 @@ import type { Note } from "@/lib/types";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import { Separator } from "../ui/separator";
 
 export default function NoteCard({
   note,
+  fullView = false,
   onDelete,
 }: {
   note: Note;
+  fullView?: boolean;
   onDelete: (id: number) => void;
 }) {
-  const formattedDate = new Date(note.created_at!).toLocaleDateString();
+  const formattedDate = new Date(note.created_at!).toLocaleString();
   const navigate = useNavigate();
   const handleView = () => {
     navigate(`/notes/${note.id}`);
@@ -19,10 +22,16 @@ export default function NoteCard({
   return (
     <Card className="flex h-full w-full justify-between">
       <CardHeader className="text-lg font-bold">
-        {note.title.slice(0, 20)}
-        {note.title.length > 20 ? "..." : ""}
+        {fullView
+          ? note.title
+          : note.title.length <= 20
+            ? note.title
+            : note.title.slice(0, 20) + "..."}
       </CardHeader>
-      <CardContent className="line-clamp-3 align-text-top break-words whitespace-pre-line">
+      <Separator />
+      <CardContent
+        className={`${fullView ? "" : "line-clamp-3"} mb-auto align-text-top break-words whitespace-pre-line`}
+      >
         {note.content}
       </CardContent>
       <CardFooter className="flex w-full items-center justify-between px-4">

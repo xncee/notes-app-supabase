@@ -22,11 +22,10 @@ export default function UserActionsMenu() {
           size={"sm"}
           className="flex items-center gap-2 border-none bg-none shadow-none"
         >
-          <div className="h-8.5 w-8.5 rounded-full bg-[var(--color-ring)]"></div>
+          <div className="flex h-8.5 w-8.5 rounded-full bg-[var(--color-ring)]"></div>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-content" align="start">
-        {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
         <DropdownMenuLabel className="text-muted-foreground">
           {user?.email}
         </DropdownMenuLabel>

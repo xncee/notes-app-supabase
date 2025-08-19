@@ -9,12 +9,14 @@ import LogoutPage from "./pages/logout-page";
 import NoteDetails from "./pages/note-details";
 import { ThemeProvider } from "./context/theme-context";
 import NavBar from "./components/nav-bar";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <div className="bg-[var(--color-background)]">
+          <Toaster dir="ltr" position="top-right" richColors />
           <Router>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -36,15 +38,6 @@ function App() {
                   <ProtectedRoute>
                     <NavBar />
                     <NoteDetails />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/protected"
-                element={
-                  <ProtectedRoute>
-                    <NavBar />
-                    <NotesPage />
                   </ProtectedRoute>
                 }
               />

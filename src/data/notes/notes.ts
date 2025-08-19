@@ -11,18 +11,23 @@ export async function getNotes() {
 }
 
 export async function createNote(note: Note) {
-  const { title, content } = note;
-
-  const { data, error } = await supabase
-    .from("notes")
-    .insert([{ title, content }])
-    .select();
+  const { data, error } = await supabase.from("notes").insert([note]).select();
 
   return { data, error };
 }
 
 export async function deleteNote(id: number) {
   const { data, error } = await supabase.from("notes").delete().eq("id", id);
+
+  return { data, error };
+}
+
+export async function updateNote(note: Note) {
+  const { data, error } = await supabase
+    .from("notes")
+    .update(note)
+    .eq("id", note.id)
+    .select();
 
   return { data, error };
 }

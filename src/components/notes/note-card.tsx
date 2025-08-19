@@ -1,6 +1,6 @@
 import type { Note } from "@/lib/types";
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 
 export default function NoteCard({

@@ -1,17 +1,17 @@
 import type { Note } from "@/lib/types";
 import { useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Label } from "./ui/label";
+} from "../ui/card";
+import { Label } from "../ui/label";
 import { createNote } from "@/data/notes/notes";
-import { Textarea } from "./ui/textarea";
+import { Textarea } from "../ui/textarea";
 
 export default function NoteForm({
   addNewNote,

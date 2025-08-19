@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { Note } from "@/lib/types";
 import PageNotFound from "./page-not-found";
 import InternalServerError from "./internal-server-error";
-import NoteCard from "@/components/note-card";
+import NoteCard from "@/components/notes/note-card";
 
 export default function NoteDetails() {
   const { noteId } = useParams();

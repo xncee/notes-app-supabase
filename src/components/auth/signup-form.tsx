@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useAuth } from "@/context/auth-context";
+import { toast } from "sonner";
 
 export function SignUpForm({
   className,
@@ -28,6 +29,7 @@ export function SignUpForm({
     setLoading(true);
     try {
       await signUp(email, password);
+      toast.success("Check your email for confirmation link.");
     } catch (error) {
       setError(String(error));
     }

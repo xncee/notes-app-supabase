@@ -10,6 +10,7 @@ import NoteDetails from "./pages/note-details";
 import { ThemeProvider } from "./context/theme-context";
 import NavBar from "./components/nav-bar";
 import { Toaster } from "sonner";
+import OnboardingPage from "./pages/onboarding";
 
 function App() {
   return (
@@ -38,6 +39,15 @@ function App() {
                   <ProtectedRoute>
                     <NavBar />
                     <NoteDetails />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/onboarding"
+                element={
+                  <ProtectedRoute>
+                    <NavBar />
+                    <OnboardingPage />
                   </ProtectedRoute>
                 }
               />

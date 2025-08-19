@@ -4,6 +4,7 @@ import type { Note } from "@/lib/types";
 import NoteCard from "@/components/note-card";
 import { getNotes } from "@/data/notes/notes";
 import NoteForm from "@/components/note-form";
+import { NoteSkeleton } from "@/components/note-skeleton";
 
 export default function NotesPage() {
   const [notesList, setNotesList] = useState<Note[]>([]);
@@ -35,10 +36,18 @@ export default function NotesPage() {
       setNotesList(notesList.filter((note) => note.id !== id));
     }
   };
+  const renderSkeletons = (count: number) => {
+    return (
+      <>
+        {Array.from({ length: count }, (_, index) => (
+          <NoteSkeleton key={index} />
+        ))}
+      </>
+    );
+  };
 
   return (
-    <div className="mt-10 flex w-full grid-cols-1 flex-col gap-10 p-4">
-      {/* md:grid-cols-[2fr_1fr] */}
+    <div className="mt-10 flex w-full flex-col gap-10 p-4">
       <NoteForm
         className="w-full self-center md:w-[100%] lg:w-[75%]"
         addNewNote={addNewNote}
@@ -46,7 +55,7 @@ export default function NotesPage() {
       <div className="flex flex-col gap-5">
         <h1 className="text-center text-4xl font-bold md:text-3xl">Notes</h1>
         <ul className="grid grid-cols-1 items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {isFetching && <h1>Loading..</h1>}
+          {isFetching && renderSkeletons(screen.width <= 768 ? 2 : 4)}
           {notesList.map((note) => (
             <NoteCard key={note.id} note={note} onDelete={deleteNoteById} />
           ))}

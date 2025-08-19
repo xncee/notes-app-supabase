@@ -18,13 +18,16 @@ export default function NoteCard({
 
   return (
     <Card className="flex h-full w-full justify-between">
-      <CardHeader className="text-lg font-bold">{note.title}</CardHeader>
-      <CardContent className="break-words whitespace-pre-line">
+      <CardHeader className="text-lg font-bold">
+        {note.title.slice(0, 20)}
+        {note.title.length > 20 ? "..." : ""}
+      </CardHeader>
+      <CardContent className="line-clamp-3 align-text-top break-words whitespace-pre-line">
         {note.content}
       </CardContent>
-      <CardFooter className="flex w-full justify-between px-2">
+      <CardFooter className="flex w-full items-center justify-between px-4">
         <p className="text-[var(--color-muted-foreground)]">{formattedDate}</p>
-        <div className="flex gap-1">
+        <div className="flex gap-2">
           <Button onClick={handleView}>View</Button>
           <Button onClick={() => onDelete(note.id!)}>Delete</Button>
         </div>

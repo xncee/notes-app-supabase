@@ -11,6 +11,7 @@ import {
 } from "./ui/card";
 import { Label } from "./ui/label";
 import { createNote } from "@/data/notes/notes";
+import { Textarea } from "./ui/textarea";
 
 export default function NoteForm({
   addNewNote,
@@ -26,6 +27,7 @@ export default function NoteForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     setIsLoading(true);
     const note = {
       title: title.trim(),
@@ -67,9 +69,8 @@ export default function NoteForm({
               </div>
               <div className="grid gap-3">
                 <Label htmlFor="content">Content</Label>
-                <Input
+                <Textarea
                   id="content"
-                  type="text"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Enter content.."
@@ -78,7 +79,10 @@ export default function NoteForm({
                 <p className="text-center text-red-400">{error}</p>
               </div>
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full">
+                <Button
+                  type="submit"
+                  className={`w-full ${isLoading ? "cursor-not-allowed opacity-50" : ""}`}
+                >
                   {isLoading ? "Adding Note..." : "Add Note"}
                 </Button>
               </div>

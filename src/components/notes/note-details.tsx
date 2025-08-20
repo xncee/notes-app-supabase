@@ -65,7 +65,7 @@ export default function NoteDetails({ note }: { note: Note }) {
             {formatDate(note.created_at!)}
           </p>
           <textarea
-            className="font-poppins field-sizing-content w-full resize-none border-none pb-2 text-2xl leading-tight font-extrabold text-balance break-words whitespace-pre-line outline-none"
+            className="font-poppins w-full resize-none border-none pb-2 text-2xl leading-tight font-extrabold text-balance break-words whitespace-pre-line outline-none"
             value={currentNoteTitle}
             onChange={(e) => setCurrentNoteTitle(e.target.value)}
             onBlur={handleUpdateNote}
@@ -95,7 +95,7 @@ export default function NoteDetails({ note }: { note: Note }) {
       <CardContent>
         <TextEditor>
           <textarea
-            className="field-sizing-content w-full resize-none border-none break-words whitespace-pre-line outline-none"
+            className="field-sizing-content h-full w-full resize-none border-none break-words whitespace-pre-line outline-none"
             value={currentNoteContent}
             onChange={(e) => setCurrentNoteContent(e.target.value)}
             onBlur={handleUpdateNote}

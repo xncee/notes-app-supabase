@@ -60,7 +60,7 @@ export default function NoteDetails({ note }: { note: Note }) {
   return (
     <Card className="flex h-full w-full justify-between">
       <CardHeader className="flex flex-col justify-between gap-5 md:flex-row">
-        <div className="flex flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
           <p className="text-muted-foreground float-right">
             {formatDate(note.created_at!)}
           </p>

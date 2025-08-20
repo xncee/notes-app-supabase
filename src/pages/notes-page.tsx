@@ -4,7 +4,7 @@ import type { Note } from "@/lib/types";
 import NoteCard from "@/components/notes/note-card";
 import { getNotes } from "@/data/notes/notes";
 import NoteForm from "@/components/notes/note-form";
-import { NoteSkeleton } from "@/components/notes/note-skeleton";
+import { NoteCardSkeleton } from "@/components/skeletons/note-card-skeleton";
 import { toast } from "sonner";
 import { Separator } from "../components/ui/separator";
 
@@ -52,7 +52,7 @@ export default function NotesPage() {
     return (
       <>
         {Array.from({ length: count }, (_, index) => (
-          <NoteSkeleton key={index} />
+          <NoteCardSkeleton key={index} />
         ))}
       </>
     );

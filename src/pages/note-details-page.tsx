@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import type { Note } from "@/lib/types";
 import PageNotFound from "./page-not-found";
 import InternalServerError from "./internal-server-error";
-import NoteDetail from "@/components/notes/note-detail";
+import NoteDetails from "@/components/notes/note-details";
 import { getNoteById } from "@/data/notes/notes";
+import NoteDetailsSkeleton from "@/components/skeletons/note-details-skeleton";
 
-export default function NoteDetails() {
+export default function NoteDetailsPage() {
   const { noteId } = useParams();
   const [note, setNote] = useState<Note | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +33,11 @@ export default function NoteDetails() {
   }
 
   if (isLoading) {
-    return null;
+    return (
+      <div className="p-4">
+        <NoteDetailsSkeleton />
+      </div>
+    );
   }
 
   if (!note) {
@@ -40,7 +45,7 @@ export default function NoteDetails() {
   }
   return (
     <div className="p-4">
-      <NoteDetail note={note} />
+      <NoteDetails note={note} />
     </div>
   );
 }

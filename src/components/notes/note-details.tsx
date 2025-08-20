@@ -9,7 +9,7 @@ import TextEditor from "./text-editor";
 import { Trash2 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
-export default function NoteDetail({ note }: { note: Note }) {
+export default function NoteDetails({ note }: { note: Note }) {
   const [currentNoteContent, setCurrentNoteContent] = useState<string>(
     note.content,
   );
@@ -44,12 +44,14 @@ export default function NoteDetail({ note }: { note: Note }) {
 
   return (
     <Card className="flex h-full w-full justify-between">
-      <CardHeader className="flex flex-wrap-reverse justify-between gap-5">
+      <CardHeader className="flex flex-col justify-between gap-5 md:flex-row">
         <div className="flex flex-col gap-2">
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground float-right">
             {formatDate(note.created_at!)}
           </p>
-          <h1 className="text-2xl font-bold text-balance">{note.title}</h1>
+          <h1 className="pb-2 text-2xl leading-tight font-extrabold text-balance break-words">
+            {note.title}
+          </h1>
         </div>
         <div className="mb-auto ml-auto flex gap-2">
           <Button

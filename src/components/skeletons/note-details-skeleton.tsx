@@ -16,8 +16,7 @@ export default function NoteDetailsSkeleton() {
       </CardHeader>
       <Separator />
       <CardFooter className="flex w-full items-center justify-between px-4"></CardFooter>
-      <CardContent className="flex flex-col gap-2">
-        <Skeleton className="h-7 w-full" />
+      <CardContent className="flex flex-col gap-3">
         <Skeleton className="h-7 w-full" />
         <Skeleton className="h-7 w-full" />
         <Skeleton className="h-7 w-full" />

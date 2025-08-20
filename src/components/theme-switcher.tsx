@@ -15,7 +15,7 @@ const ThemeSwitcher = ({ ICON_SIZE }: { ICON_SIZE: number }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size={"sm"}>
+        <Button variant="ghost" size={"icon"}>
           {theme === "light" ? (
             <Sun
               key="light"

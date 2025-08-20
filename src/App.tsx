@@ -4,13 +4,14 @@ import HomePage from "./pages/home-page";
 import LoginPage from "./pages/login-page";
 import SignUpPage from "./pages/signup-page";
 import ProtectedRoute from "./components/protected-route";
-import NotesPage from "./pages/notes-page";
+import NotesPage from "./pages/notes/page";
 import LogoutPage from "./pages/logout-page";
-import NoteDetailsPage from "./pages/note-details-page";
+import NoteDetailsPage from "./pages/notes/note-details-page";
 import { ThemeProvider } from "./context/theme-context";
-import NavBar from "./components/nav-bar";
 import { Toaster } from "sonner";
 import OnboardingPage from "./pages/onboarding";
+import NewNotePage from "./pages/notes/new-note-page";
+import MainLayout from "./components/layouts/main-layout";
 
 function App() {
   return (
@@ -20,16 +21,45 @@ function App() {
           <Toaster dir="ltr" position="top-right" richColors />
           <Router>
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignUpPage />} />
-              <Route path="/logout" element={<LogoutPage />} />
+              <Route
+                path="/"
+                element={
+                  <MainLayout>
+                    <HomePage />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <MainLayout>
+                    <LoginPage />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <MainLayout>
+                    <SignUpPage />
+                  </MainLayout>
+                }
+              />
+              <Route
+                path="/logout"
+                element={
+                  <MainLayout>
+                    <LogoutPage />
+                  </MainLayout>
+                }
+              />
               <Route
                 path="/notes"
                 element={
                   <ProtectedRoute>
-                    <NavBar />
-                    <NotesPage />
+                    <MainLayout>
+                      <NotesPage />
+                    </MainLayout>
                   </ProtectedRoute>
                 }
               />
@@ -37,8 +67,19 @@ function App() {
                 path="/notes/:noteId"
                 element={
                   <ProtectedRoute>
-                    <NavBar />
-                    <NoteDetailsPage />
+                    <MainLayout>
+                      <NoteDetailsPage />
+                    </MainLayout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/notes/new"
+                element={
+                  <ProtectedRoute>
+                    <MainLayout>
+                      <NewNotePage />
+                    </MainLayout>
                   </ProtectedRoute>
                 }
               />
@@ -46,8 +87,9 @@ function App() {
                 path="/onboarding"
                 element={
                   <ProtectedRoute>
-                    <NavBar />
-                    <OnboardingPage />
+                    <MainLayout>
+                      <OnboardingPage />
+                    </MainLayout>
                   </ProtectedRoute>
                 }
               />

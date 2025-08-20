@@ -3,10 +3,8 @@ import { useEffect, useState } from "react";
 import type { Note } from "@/lib/types";
 import NoteCard from "@/components/notes/note-card";
 import { getNotes } from "@/data/notes/notes";
-import NoteForm from "@/components/notes/note-form";
 import { NoteCardSkeleton } from "@/components/skeletons/note-card-skeleton";
 import { toast } from "sonner";
-import { Separator } from "../components/ui/separator";
 
 export default function NotesPage() {
   const [notesList, setNotesList] = useState<Note[]>([]);
@@ -27,10 +25,6 @@ export default function NotesPage() {
       setNotesList(data!);
     }
     setFetching(false);
-  };
-
-  const addNewNote = async (note: Note) => {
-    setNotesList((prevNotes) => [note, ...prevNotes]);
   };
 
   const deleteNoteById = async (id: number) => {
@@ -59,14 +53,9 @@ export default function NotesPage() {
   };
 
   return (
-    <div className="mt-10 flex w-full flex-col gap-10 p-4">
-      <NoteForm
-        className="w-full self-center md:w-[100%] lg:w-[75%]"
-        addNewNote={addNewNote}
-      />
-      <Separator />
-      <div className="flex flex-col gap-5">
-        <h1 className="text-center text-3xl font-bold">Notes</h1>
+    <div className="mt-10 flex w-full flex-col p-4">
+      <div className="flex flex-col gap-10">
+        <h1 className="text-center text-4xl font-extrabold">Notes</h1>
         <ul className="grid grid-cols-1 items-center gap-4 md:grid-cols-2 lg:grid-cols-3">
           {isFetching && renderSkeletons()}
           {notesList.map((note) => (

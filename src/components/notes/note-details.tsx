@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import TextEditor from "./text-editor";
 import { Trash2 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import TextareaAutosize from "react-textarea-autosize";
 
 export default function NoteDetails({ note }: { note: Note }) {
   const [currentNoteTitle, setCurrentNoteTitle] = useState<string>(note.title);
@@ -92,10 +93,12 @@ export default function NoteDetails({ note }: { note: Note }) {
       </CardHeader>
       <Separator />
       <CardFooter className="flex w-full items-center justify-between px-4"></CardFooter>
-      <CardContent className="h-auto">
+      <CardContent>
         <TextEditor>
-          <textarea
-            className="field-sizing-content h-full w-full resize-none border-none break-words whitespace-pre-line outline-none"
+          {/* <textarea */}
+          {/* normal textarea doesn't auto-resize on mobile  */}
+          <TextareaAutosize
+            className="field-sizing-content h-auto w-full resize-none border-none break-words whitespace-pre-line outline-none"
             value={currentNoteContent}
             onChange={(e) => setCurrentNoteContent(e.target.value)}
             onBlur={handleUpdateNote}

@@ -6,7 +6,7 @@ import SignUpPage from "./pages/signup-page";
 import ProtectedRoute from "./components/protected-route";
 import NotesPage from "./pages/notes-page";
 import LogoutPage from "./pages/logout-page";
-import NoteDetails from "./pages/note-details";
+import NoteDetailsPage from "./pages/note-details-page";
 import { ThemeProvider } from "./context/theme-context";
 import NavBar from "./components/nav-bar";
 import { Toaster } from "sonner";
@@ -38,7 +38,7 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <NavBar />
-                    <NoteDetails />
+                    <NoteDetailsPage />
                   </ProtectedRoute>
                 }
               />

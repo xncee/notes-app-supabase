@@ -15,3 +15,14 @@ export const generateLoremIpsum = (sentences: number) => {
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function formatDate(date: string, hour24h = false) {
+  return new Date(date).toLocaleString(undefined, {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: !hour24h,
+  });
+}

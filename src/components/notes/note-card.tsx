@@ -21,7 +21,9 @@ export default function NoteCard({
   return (
     <Card className="flex h-full w-full justify-between">
       <CardHeader>
-        <p className="text-muted-foreground">{formatDate(note.created_at!)}</p>
+        <p className="text-muted-foreground text-sm">
+          {formatDate(note.created_at!)}
+        </p>
         <h2 className="line-clamp-1 text-lg font-bold">{note.title}</h2>
       </CardHeader>
       <Separator />
@@ -29,9 +31,12 @@ export default function NoteCard({
         {note.content}
       </CardContent>
       <CardFooter className="flex w-full items-center justify-end px-4">
-        {/* <p className="text-[var(--color-muted-foreground)]">{formattedDate}</p> */}
         <div className="flex gap-2">
-          <Button className="hover:cursor-pointer" onClick={handleView}>
+          <Button
+            variant="secondary"
+            className="hover:cursor-pointer"
+            onClick={handleView}
+          >
             <Eye />
             View
           </Button>

@@ -8,7 +8,6 @@ import {
 } from "./ui/dropdown-menu";
 import { useAuth } from "@/context/auth-context";
 import { useNavigate } from "react-router-dom";
-import { Button } from "./ui/button";
 
 export default function UserActionsMenu() {
   const { user } = useAuth();
@@ -17,15 +16,9 @@ export default function UserActionsMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size={"sm"}
-          className="flex items-center gap-2 border-none bg-none shadow-none"
-        >
-          <div className="flex h-8.5 w-8.5 rounded-full bg-[var(--color-ring)]"></div>
-        </Button>
+        <button className="bg-accent flex h-10 w-10 rounded-full"></button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-content" align="start">
+      <DropdownMenuContent className="w-content" align="end">
         <DropdownMenuLabel className="text-muted-foreground">
           {user?.email}
         </DropdownMenuLabel>
@@ -46,6 +39,7 @@ export default function UserActionsMenu() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
+          variant="destructive"
           onClick={() => {
             navigate("/logout");
           }}

@@ -9,7 +9,7 @@ export default function NavBar() {
   return (
     <div className="flex w-full items-center justify-between border-b px-5 py-4 shadow-sm">
       <Link to="/" replace>
-        <p className="text-2xl font-bold text-blue-700">Notes App</p>
+        <h1 className="text-2xl font-extrabold text-blue-700">Notes App</h1>
       </Link>
       <div className="flex gap-2">
         {isAuth ? <UserActionsMenu /> : <AuthButtons />}

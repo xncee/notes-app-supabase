@@ -92,7 +92,7 @@ export default function NoteDetails({ note }: { note: Note }) {
       </CardHeader>
       <Separator />
       <CardFooter className="flex w-full items-center justify-between px-4"></CardFooter>
-      <CardContent>
+      <CardContent className="h-auto">
         <TextEditor>
           <textarea
             className="field-sizing-content h-full w-full resize-none border-none break-words whitespace-pre-line outline-none"

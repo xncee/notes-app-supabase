@@ -16,8 +16,8 @@ export function NoteCardSkeleton() {
       </CardContent>
       <CardFooter className="mt-auto flex w-full items-center justify-end px-4">
         <div className="flex gap-2">
-          <Skeleton className="h-8.5 w-20" />
-          <Skeleton className="h-8.5 w-full" />
+          <Skeleton className="h-8.5 w-[75px]" />
+          <Skeleton className="h-8.5 w-[85px]" />
         </div>
       </CardFooter>
     </Card>

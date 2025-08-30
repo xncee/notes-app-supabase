@@ -8,8 +8,8 @@ export default function HomePage() {
           Organize Your Notes Effortlessly
         </h2>
         <p className="mb-8 max-w-xl text-lg md:text-xl">
-          Secure, simple, and fast note-taking app powered by Supabase. Access
-          your notes anywhere, anytime.
+          Secure, simple, and fast note-taking app. Access your notes anywhere,
+          anytime.
         </p>
         <Link
           to="/signup"

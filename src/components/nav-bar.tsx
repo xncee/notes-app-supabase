@@ -12,7 +12,7 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex w-full items-center justify-between border-b px-5 py-5 shadow-sm md:px-10 md:py-5">
+    <div className="fixed flex w-full items-center justify-between border-b px-5 py-5 shadow-sm md:px-10 md:py-5">
       <Link to="/" replace>
         <h1 className="text-primary text-2xl font-extrabold">Notes App</h1>
       </Link>

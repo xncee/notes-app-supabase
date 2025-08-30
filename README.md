@@ -13,6 +13,7 @@ Notes App is a simple note-taking app and a practice full stack project built wi
 ## Screenshots
 
 ![mobile-light-mode-screenshots](src/assets/images/mobile-light.png)
+
 ![mobile-dark-mode-screenshots](src/assets/images/mobile-dark.png)
 
 ---

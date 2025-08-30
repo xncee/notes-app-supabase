@@ -22,7 +22,7 @@ export default function NoteCard({
     <Card className="flex h-full w-full justify-between">
       <CardHeader>
         <p className="text-muted-foreground text-sm">
-          {formatDate(note.created_at!)}
+          {formatDate(note.updated_at!)}
         </p>
         <h2 className="line-clamp-1 text-lg font-bold">{note.title}</h2>
       </CardHeader>

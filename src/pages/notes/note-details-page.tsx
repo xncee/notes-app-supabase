@@ -24,7 +24,7 @@ export default function NoteDetailsPage() {
       return <InternalServerError />;
     }
 
-    if (data) setNote(data[0]);
+    if (data) setNote(data);
     setIsLoading(false);
   };
 

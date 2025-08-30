@@ -11,6 +11,7 @@ import { formatDate } from "@/lib/utils";
 import TextareaAutosize from "react-textarea-autosize";
 
 export default function NoteDetails({ note }: { note: Note }) {
+  const [updatedDate, setUpdatedDate] = useState<string>(note.updated_at);
   const [currentNoteTitle, setCurrentNoteTitle] = useState<string>(note.title);
   const [currentNoteContent, setCurrentNoteContent] = useState<string>(
     note.content,
@@ -47,12 +48,13 @@ export default function NoteDetails({ note }: { note: Note }) {
 
     note.content = currentNoteContent;
     note.title = currentNoteTitle;
-    const { error } = await updateNote(note);
+    const { data, error } = await updateNote(note);
     if (error) {
       toast.error("Note Was Not Updated", {
         description: error.message || "An error occurred.",
       });
     } else {
+      setUpdatedDate(data.updated_at!);
       toast.message("Note updated.");
     }
     setEditing(false);
@@ -63,7 +65,7 @@ export default function NoteDetails({ note }: { note: Note }) {
       <CardHeader className="flex flex-col justify-between gap-5 md:flex-row">
         <div className="flex w-full flex-col gap-2">
           <p className="text-muted-foreground float-right">
-            {formatDate(note.created_at!)}
+            {formatDate(updatedDate)}
           </p>
           <textarea
             className="font-poppins field-sizing-content w-full resize-none border-none pb-2 text-2xl leading-tight font-extrabold text-balance break-words whitespace-pre-line outline-none"

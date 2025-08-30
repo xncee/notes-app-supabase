@@ -97,7 +97,7 @@ export function SignUpForm({
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? "Signing up..." : "Sign Up"}
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full" disabled>
                   Sign Up with Google
                 </Button>
               </div>
